@@ -1,3 +1,25 @@
+%***************************************************************************************************
+%*   Calculate outlet temperature of flue gas and steam in super-heater bundle by presented code.
+%*   I take no responsibilities for any errors in the code or damage thereby.
+%*   Please notify me at zolfaghari1992iut@gmail.com if the code is used in any type of application.
+%***************************************************************************************************
+%*   Developer   : Ali Zolfaghari Sichani (15-06-2020)
+%***************************************************************************************************
+%*   References  : 
+%*   FLUID FLOW AND HEAT TRANSFER IN TUBE BANKS, Steven Brydon Beale
+%*   Fundamentals of Heat and Mass Transfer, theodore L. Bergman AND adrienne S. Lavine
+%*   REFPROP.m source code, Keith Wait
+%***************************************************************************************************
+%*   Equation of complete combustion reaction + tube bundle heat transfer :   
+%*   natural gas (methane + propane) + air (O2 + N2) ----> CO2 + H2O + N2
+%*   Inputs      :
+%*   other input parameters are clear by their names
+%*   Outputs      :
+%*   T_steam_o   (outlet steam temperature     )  (oC)
+%*   T_flue_o    (outlet flue gas temperature  )  (oC)
+%***************************************************************************************************
+
+    
 clear,clc
 close all
 format compact
@@ -6,16 +28,6 @@ format long
 
 % INPUT %
 % =========================================================================
-
-Flue_CorrectionFactor = 1.5;
-Steam_CorrectionFactor = 2.5;
-
-BankType   = 2;
-SolverType = 1;
-NuFType    = 3;
-NuSType    = 3;
-EHEXType   = 1;
-ZpType     = 2;
 
 BoilerCapacity = 3140; %(kcal/hr)
 SteamFlowRate = 12000.0; %(kg/hr)
@@ -50,8 +62,8 @@ Duct_corbel = 100*0.001;
 T_flue_i = 1200.0;
 T_steam_i = 225.0;
 
-P_steam_i = 25.0;
-P_flue_i = 0.9;
+P_steam_i = 25.0; % (bar)
+P_flue_i = 0.9; % (bar)
 
 T_flue_o = 300.0;
 T_steam_o = 400.0;
@@ -61,6 +73,15 @@ FC = 0.95;
 MaxIter = 100;
 MaxError = 0.0001;
 Ws = 0.25;
+
+Flue_CorrectionFactor = 1.5;
+Steam_CorrectionFactor = 2.5;
+
+BankType   = 2;
+SolverType = 1;
+NuFType    = 3;
+NuSType    = 3;
+EHEXType   = 1;
 
 % INITIALIZE %
 % =========================================================================
